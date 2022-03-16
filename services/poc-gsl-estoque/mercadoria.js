@@ -43,7 +43,7 @@ module.exports = class Mercadoria {
             .promise();
   }
   
-  static async remover(id, db) {
+  static remover(id, db) {
     db
       .delete({
         TableName: "poc-gsl-mercadorias",

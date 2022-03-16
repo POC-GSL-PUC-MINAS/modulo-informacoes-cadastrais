@@ -73,6 +73,7 @@ exports.handler = async (event, context) => {
         break;
         
       // CRUD MERCADORIAS
+      // TODO: Fazer todas as rotas caberem dentro de /api/v1/fornecedores
       case "GET /api/v1/mercadorias":
         body = await Mercadoria.listar(dynamo);
         break;

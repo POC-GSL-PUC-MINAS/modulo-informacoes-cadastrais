@@ -30,8 +30,12 @@ module.exports = class Veiculo {
             })
             .promise();
   }
+
+  static listar(db) {
+    return db.scan({ TableName: "poc-gsl-veiculos" }).promise();
+  }
   
-  static listar(transportadoraId, db) {
+  static listarPorTransportadora(transportadoraId, db) {
     return db
             .get({
               TableName: "poc-gsl-veiculos",

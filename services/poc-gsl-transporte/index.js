@@ -31,7 +31,7 @@ exports.handler = async (event, context) => {
         body = await Transportadora.obter(event.pathParameters.id, dynamo);
         break;
       case "GET /api/v1/transportadoras/{id}/veiculos":
-        body = await Veiculo.listar(event.pathParameters.id, dynamo);
+        body = await Veiculo.listarPorTransportadora(event.pathParameters.id, dynamo);
         break;
       case "GET /api/v1/transportadoras/{transportadoraId}/veiculos/{veiculoId}":
         body = await Veiculo.obter(event.pathParameters.veiculoId,
@@ -65,14 +65,7 @@ exports.handler = async (event, context) => {
       case "GET /api/v1/veiculos":
         body = await Veiculo.listar(dynamo);
         break;
-      case "GET /api/v1/veiculos/{id}":
-        body = await Veiculo.obter(event.pathParameters.id, dynamo);
-        break;
-      case "DELETE /api/v1/veiculos/{id}":
-        await Veiculo.remover(event.pathParameters.id, dynamo);
-        body = `Veiculo removido com sucesso.`;
-        break;
-          
+
       default:
         throw new Error(`Rota inválida: "${event.routeKey}"`);
     }

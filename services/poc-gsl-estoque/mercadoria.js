@@ -17,12 +17,13 @@ module.exports = class Mercadoria {
       .promise();
   }
   
-  static obter(id, db) {
+  static obter(id, fornecedorId, db) {
     return db
             .get({
               TableName: "poc-gsl-mercadorias",
               Key: {
-                id: id
+                id: id,
+                fornecedorId: fornecedorId
               }
             })
             .promise();
@@ -43,12 +44,13 @@ module.exports = class Mercadoria {
             .promise();
   }
   
-  static remover(id, db) {
+  static remover(id, fornecedorId, db) {
     db
       .delete({
         TableName: "poc-gsl-mercadorias",
         Key: {
-          id: id, db
+          id: id,
+          fornecedorId: fornecedorId
         }
       })
       .promise();

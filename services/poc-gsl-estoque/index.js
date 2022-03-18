@@ -50,7 +50,7 @@ exports.handler = async (event, context) => {
         await Fornecedor.gravar(geradorId, JSON.parse(event.body), dynamo);
         body = `Fornecedor criado com sucesso.`;
         break;
-       case "POST /api/v1/fornecedores/{id}/mercadoria":
+       case "POST /api/v1/fornecedores/{id}/mercadorias":
         await Mercadoria.gravar(geradorId, event.pathParameters.id, JSON.parse(event.body), dynamo);
         body = `Mercadoria criada com sucesso.`;
         break;
@@ -63,13 +63,31 @@ exports.handler = async (event, context) => {
       case "GET /api/v1/fornecedores/{id}/mercadorias":
         body = await Mercadoria.listarPorFornecedor(event.pathParameters.id, dynamo);
         break;
+      case "GET /api/v1/fornecedores/{fornecedorId}/mercadorias/{mercadoriaId}":
+        body = await Mercadoria.obter(event.pathParameters.mercadoriaId,
+                                      event.pathParameters.fornecedorId,
+                                      dynamo);
+        break;
       case "PUT /api/v1/fornecedores/{id}":
         await Fornecedor.gravar(event.pathParameters.id, JSON.parse(event.body), dynamo);
         body = `Fornecedor atualizado com sucesso.`;
         break;
+      case "PUT /api/v1/fornecedores/{fornecedorId}/mercadorias/{mercadoriaId}":
+        await Mercadoria.gravar(event.pathParameters.mercadoriaId,
+                                event.pathParameters.fornecedorId,
+                                JSON.parse(event.body),
+                                dynamo);
+        body = `Mercadoria atualizada com sucesso.`;
+        break;
       case "DELETE /api/v1/fornecedores/{id}":
         await Fornecedor.remover(event.pathParameters.id, dynamo);
         body = `Fornecedor removido com sucesso.`;
+        break;
+      case "DELETE /api/v1/fornecedores/{fornecedorId}/mercadorias/{mercadoriaId}":
+        await Mercadoria.remover(event.pathParameters.mercadoriaId,
+                                event.pathParameters.fornecedorId,
+                                dynamo);
+        body = `Mercadoria removida com sucesso.`;
         break;
         
       // CRUD MERCADORIAS
@@ -77,6 +95,7 @@ exports.handler = async (event, context) => {
       case "GET /api/v1/mercadorias":
         body = await Mercadoria.listar(dynamo);
         break;
+
       case "GET /api/v1/mercadorias/{id}":
         body = await Mercadoria.obter(event.pathParameters.id, dynamo);
         break;

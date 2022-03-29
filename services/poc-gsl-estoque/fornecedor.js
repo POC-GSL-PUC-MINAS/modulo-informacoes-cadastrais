@@ -7,20 +7,11 @@ module.exports = class Fornecedor {
           id: id,
           cnpj: dados.cnpj,
           razaoSocial: dados.razaoSocial,
-          nomeFantasia: dados.nomeFantasia,
-          status: dados.status,
-          rua: dados.rua,
-          numeroRua: dados.numeroRua,
-          complemento: dados.complemento,
-          bairro: dados.bairro,
-          cep: dados.cep,
-          cidade: dados.cidade,
-          estado: dados.estado,
-          pais: dados.pais,
-          latitude: dados.latitude,
-          longitude: dados.longitude,
+          nomeFantasia: dados.nomeFantasia,          
           email: dados.email,
-          telefone: dados.telefone
+          telefone: dados.telefone,
+          endereco: dados.endereco,
+          situacao: dados.situacao
         }
       })
       .promise();
@@ -46,7 +37,7 @@ module.exports = class Fornecedor {
       .delete({
         TableName: "poc-gsl-fornecedores",
         Key: {
-          id: id, db
+          id: id
         }
       })
       .promise();

@@ -36,14 +36,22 @@ exports.handler = async (event, context) => {
         await Deposito.remover(event.pathParameters.id, dynamo);
         body = `Depósito removido com sucesso.`;
         break;
-      case "POST /api/v1/depositos/{depositoId}/mercadorias/{mercadoriaId}/incluir":
+      case "POST /api/v1/depositos/{depositoId}/mercadorias/{mercadoriaId}/adicionar":
         var requestJSON = JSON.parse(event.body)
-        await Estoque.incluirMercadoria(event.pathParameters.depositoId,
-                                        event.pathParameters.mercadoriaId, 
-                                        requestJSON.quantidade, 
-                                        dynamo);
-        body = `Mercadoria incluída com sucesso.`;
+        await Estoque.adicionarMercadoria(event.pathParameters.depositoId,
+                                          event.pathParameters.mercadoriaId, 
+                                          requestJSON.quantidade, 
+                                          dynamo);
+        body = `Mercadoria adicionada com sucesso.`;
         break;
+      case "POST /api/v1/depositos/{depositoId}/mercadorias/{mercadoriaId}/remover":
+          var requestJSON = JSON.parse(event.body)
+          await Estoque.removerMercadoria(event.pathParameters.depositoId,
+                                          event.pathParameters.mercadoriaId, 
+                                          requestJSON.quantidade, 
+                                          dynamo);
+          body = `Mercadoria removida com sucesso.`;
+          break;
       
       // CRUD FORNECEDORES
       case "POST /api/v1/fornecedores":

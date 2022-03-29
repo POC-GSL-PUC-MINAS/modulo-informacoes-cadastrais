@@ -7,11 +7,10 @@ module.exports = class Mercadoria {
           id: id,
           fornecedorId: fornecedorId,
           descricao: dados.descricao,
-          codigoNCM: dados.codigoNCM,
-          codigoBarrasTipo: dados.codigoBarrasTipo,
-          codigoBarrasValor: dados.codigoBarrasValor,
+          codigoNCM: dados.codigoNCM,        
+          codigoBarras: dados.codigoBarras,
           precoVenda: dados.precoVenda,
-          impostos: dados.impostos,
+          precoImpostos: dados.impostos,
         }
       })
       .promise();
@@ -34,14 +33,13 @@ module.exports = class Mercadoria {
   }
   
   static listarPorFornecedor(fornecedorId, db) {
-    return db
-            .get({
-              TableName: "poc-gsl-mercadorias",
-              Key: {
-                fornecedorId: fornecedorId
-              }
-            })
-            .promise();
+    return db.scan({ 
+      TableName: "poc-gsl-mercadorias",
+      FilterExpression: 'fornecedorId = :fornecedorId',
+      ExpressionAttributeValues: {
+        ':fornecedorId': fornecedorId
+      }
+    }).promise();
   }
   
   static remover(id, fornecedorId, db) {

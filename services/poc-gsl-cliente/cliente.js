@@ -8,19 +8,10 @@ module.exports = class Cliente {
           cnpj: dados.cnpj,
           razaoSocial: dados.razaoSocial,
           nomeFantasia: dados.nomeFantasia,
-          status: dados.status,
-          rua: dados.rua,
-          numeroRua: dados.numeroRua,
-          complemento: dados.complemento,
-          bairro: dados.bairro,
-          cep: dados.cep,
-          cidade: dados.cidade,
-          estado: dados.estado,
-          pais: dados.pais,
-          latitude: dados.latitude,
-          longitude: dados.longitude,
           email: dados.email,
-          telefone: dados.telefone
+          telefone: dados.telefone,
+          endereco: dados.endereco,
+          situacao: dados.situacao         
         }
       })
       .promise();
